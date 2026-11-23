@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#09070d">
+<title>هدية صغيرة إلك ❤️</title>
+<style>
+:root{--pink:#ff668d;--deep:#09070d;--soft:#ffd1df}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 20%,#28101e 0%,#100a13 42%,var(--deep) 100%);color:#fff;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;display:grid;place-items:center;padding:22px;overflow-x:hidden}
+main{width:min(100%,680px);text-align:center}
+.panel{background:rgba(255,255,255,.055);border:1px solid rgba(255,155,185,.22);border-radius:28px;padding:clamp(24px,6vw,44px);box-shadow:0 18px 70px #0008;backdrop-filter:blur(10px)}
+.kicker{color:#ff9db8;font-size:.9rem;letter-spacing:.08em}
+h1{font-size:clamp(2rem,8vw,3.5rem);margin:12px 0;color:#ffe7ef}
+p{color:#e8cbd5;line-height:1.8}
+.question{font-size:clamp(1.5rem,6vw,2.2rem);font-weight:800;margin:24px 0}
+.buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:25px}
+button{border:0;border-radius:999px;padding:14px 30px;font-size:1.1rem;font-weight:800;cursor:pointer;transition:transform .18s,filter .18s}
+button:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.yes{background:linear-gradient(135deg,#ff7da0,#ff477c);color:#fff;box-shadow:0 8px 25px #ff477c45}
+.no{background:#fff0f5;color:#a52e55}
+input{width:min(100%,260px);padding:15px 18px;border-radius:14px;border:1px solid #ff9db866;background:#140d16;color:white;text-align:center;font-size:1.2rem;outline:none;direction:ltr}
+input:focus{border-color:var(--pink);box-shadow:0 0 0 3px #ff668d22}
+.error{color:#ff9eae;font-weight:700;min-height:32px;margin-top:18px}
+.hidden{display:none!important}
+.heart-wrap{margin:14px auto 0;max-width:590px}
+svg{width:100%;height:auto;overflow:visible;filter:drop-shadow(0 0 16px #ff477c55)}
+.heart-title{font-size:clamp(1.3rem,5vw,2rem);color:#ffb5ca;margin:8px 0 0}
+.small{font-size:.85rem;color:#b99aa7;margin-top:24px}
+.spark{position:fixed;pointer-events:none;color:#ff8eae;animation:float 5s linear infinite;opacity:.5}
+@keyframes float{from{transform:translateY(105vh) rotate(0);opacity:0}15%{opacity:.55}to{transform:translateY(-10vh) rotate(260deg);opacity:0}}
+</style>
+</head>
+<body>
+<main>
+<section class="panel" id="step1">
+<div class="kicker">عندي سؤال صغير إلك ✨</div>
+<h1>كل عام وإنتِ بخير ❤️</h1>
+<div class="question">تحبّيني؟</div>
+<p>اختاري جوابچ… بس تره الاثنين نفس الشي 😌</p>
+<div class="buttons">
+<button class="yes" onclick="showDate()">إي ❤️</button>
+<button class="no" onclick="showDate()">إي هم ❤️</button>
+</div>
+</section>
+
+<section class="panel hidden" id="step2">
+<div class="kicker">زين، سؤال ثاني…</div>
+<div class="question">شنو اليوم اللي كلتيلي بيه أحبك؟</div>
+<p>جاوبي من ذاكرتچ ❤️</p>
+<input id="answer" type="text" inputmode="numeric" autocomplete="off" placeholder="اكتبي جوابچ هنا" aria-label="التاريخ">
+<div class="buttons"><button class="yes" onclick="checkAnswer()">تأكيد 💗</button></div>
+<div class="error" id="feedback" aria-live="polite"></div>
+</section>
+
+<section class="panel hidden" id="step3">
+<div class="kicker">إجابتچ صح… وهاي إلك 💞</div>
+<h1>أحبچ بكل لغات العالم</h1>
+<div class="heart-wrap">
+<svg viewBox="0 0 600 530" role="img" aria-label="قلب مكوّن من عبارة أحبك بلغات كثيرة">
+<defs><clipPath id="heartClip"><path d="M300 490 C255 450 45 300 45 165 C45 75 115 25 195 25 C245 25 282 55 300 95 C318 55 355 25 405 25 C485 25 555 75 555 165 C555 300 345 450 300 490Z"/></clipPath></defs>
+<g clip-path="url(#heartClip)" fill="#ff829f" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">
+<g id="heartWords"></g>
+</g>
+</svg>
+</div>
+<div class="heart-title">إنتِ أحلى صدفة بحياتي ❤️</div>
+<p>عيد ميلاد سعيد، وإن شاء الله كل أيامچ فرح.</p>
+</section>
+<div class="small">صُنعت بكل حب خصيصاً إلك ❤️</div>
+</main>
+<script>
+function showDate(){document.getElementById('step1').classList.add('hidden');document.getElementById('step2').classList.remove('hidden');document.getElementById('answer').focus()}
+function checkAnswer(){
+ const value=document.getElementById('answer').value.trim().replace(/\s/g,'');
+ const feedback=document.getElementById('feedback');
+ if(value==='9/9'||value==='09/09'||value==='9-9'||value==='09-09'){
+  document.getElementById('step2').classList.add('hidden');
+  document.getElementById('step3').classList.remove('hidden');
+  makeHeart();
+ }else{
+  feedback.textContent='الجواب غلط 🥺 معقولة نسيتي؟';
+ }
+}
+document.getElementById('answer').addEventListener('keydown',e=>{if(e.key==='Enter')checkAnswer()});
+function makeHeart(){
+ const words=['I love you','Te amo','Je t’aime','Ich liebe dich','Ti amo','愛してる','사랑해','我爱你','Я тебя люблю','أحبك','Seni seviyorum','Eu te amo','Kocham cię','Ik hou van jou','Anh yêu em','Σ’ αγαπώ','Я кохаю тебе','Aku cinta kamu','Jag älskar dig','รักนะ','ฉรักคุณ'];
+ const group=document.getElementById('heartWords'); if(group.childElementCount)return;
+ for(let y=55;y<=465;y+=25){
+  const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+  t.setAttribute('x','300');t.setAttribute('y',String(y));t.setAttribute('font-size', y<95||y>430?'15':'17');
+  t.textContent=Array.from({length:7},(_,i)=>words[(Math.floor(y/25)+i*3)%words.length]).join('   ');
+  group.appendChild(t);
+ }
+}
+for(let i=0;i<9;i++){const s=document.createElement('span');s.className='spark';s.textContent='♥';s.style.left=(Math.random()*100)+'vw';s.style.animationDelay=(Math.random()*5)+'s';s.style.fontSize=(12+Math.random()*18)+'px';document.body.appendChild(s)}
+</script>
+</body>
+</html>
